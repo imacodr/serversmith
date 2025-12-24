@@ -1,0 +1,260 @@
+/* Material Design Dark Theme */
+.root {
+    -fx-base: #121212;
+    -fx-background-color: #121212;
+    -fx-font-family: 'Roboto', 'Segoe UI', sans-serif;
+    -fx-font-size: 14px;
+    
+    /* Palette */
+    -color-primary: #f97316; /* Orange 500 */
+    -color-primary-variant: #ea580c; /* Orange 600 */
+    -color-secondary: #03dac6;
+    -color-background: #121212;
+    -color-surface: #1e1e1e;
+    -color-error: #cf6679;
+    -color-on-primary: #ffffff;
+    -color-on-background: #ffffff;
+    -color-on-surface: #e0e0e0;
+}
+
+/* Typography */
+.label {
+    -fx-text-fill: -color-on-surface;
+}
+
+.icon {
+    -fx-fill: -color-on-surface;
+}
+
+.button .icon {
+    -fx-fill: -color-on-primary;
+}
+
+.button:hover .icon {
+    -fx-fill: -color-on-primary;
+}
+
+.action-button {
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+}
+
+.button.text-button .icon {
+    -fx-fill: -color-primary;
+}
+
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-on-background;
+}
+
+.subheader-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: derive(-color-on-surface, -20%);
+}
+
+/* Buttons (Elevated & Contained) */
+.button {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: -color-on-primary;
+    -fx-background-radius: 4;
+    -fx-padding: 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: derive(-color-primary, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: derive(-color-primary, -10%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+/* Text Buttons (Secondary actions) */
+.button.text-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-primary;
+    -fx-effect: null;
+}
+.button.text-button:hover {
+    -fx-background-color: rgba(249, 115, 22, 0.1); /* Primary with opacity */
+}
+
+/* Inputs (Material Filled/Outlined Hybrid) */
+.text-field, .text-area, .combo-box {
+    -fx-background-color: -color-surface;
+    -fx-text-fill: -color-on-surface;
+    -fx-background-radius: 4 4 0 0;
+    -fx-border-color: transparent transparent #707070 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-prompt-text-fill: derive(-color-on-surface, -50%);
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-background-color: derive(-color-surface, 5%);
+    -fx-border-color: transparent transparent -color-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+/* Lists */
+.list-view {
+    -fx-background-color: -color-background;
+    -fx-control-inner-background: -color-background;
+    -fx-padding: 8;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-on-surface;
+    -fx-padding: 8 12;
+    -fx-background-radius: 4;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: rgba(249, 115, 22, 0.15); /* Primary alpha */
+    -fx-text-fill: -color-primary;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Cards (TitledPane or Custom VBox) */
+.card {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.14), 4, 0, 0, 2);
+    -fx-padding: 16;
+}
+
+/* TabPane */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -color-background;
+}
+
+.tab {
+    -fx-background-color: -color-background;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-width: 2;
+    -fx-padding: 10 20;
+}
+
+.tab:selected {
+    -fx-border-color: transparent transparent -color-primary transparent;
+}
+
+.tab-label {
+    -fx-text-fill: derive(-color-on-surface, -40%);
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -color-primary;
+}
+/* Tab Focus Removal */
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+}
+.tab:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+/* Progress Bar */
+.progress-bar .track {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 4;
+}
+
+/* Wizard Card Toggles */
+.card-toggle {
+    -fx-background-color: -color-surface;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.14), 4, 0, 0, 2);
+}
+
+.card-toggle:hover {
+    -fx-background-color: derive(-color-surface, 5%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 3);
+}
+
+.card-toggle:selected {
+    -fx-background-color: derive(-color-surface, 10%);
+    -fx-border-color: -color-primary;
+}
+
+.card-toggle:selected .label {
+    -fx-text-fill: -color-primary;
+}
+
+/* Dialogs */
+.dialog-pane {
+    -fx-background-color: -color-background;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: -color-background;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: -color-on-surface;
+}
+.progress-bar .bar {
+    -fx-background-color: -color-secondary;
+}
+
+/* ScrollPane */
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(-color-surface, 20%);
+    -fx-background-radius: 4;
+}
+
+/* Dashboard Polish */
+.terminal-area {
+    -fx-control-inner-background: #000000;
+    -fx-text-fill: #00ff00;
+    -fx-font-family: 'monospaced';
+    -fx-highlight-fill: #004400;
+    -fx-highlight-text-fill: #00ff00;
+    -fx-background-color: #000000;
+}
+.terminal-area .content {
+     -fx-background-color: #000000;
+}
+
+.status-badge {
+    -fx-background-radius: 12;
+    -fx-padding: 4 12;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+.status-badge.running {
+    -fx-background-color: rgba(76, 175, 80, 0.2);
+    -fx-text-fill: #4caf50;
+    -fx-border-color: #4caf50;
+    -fx-border-radius: 12;
+}
+.status-badge.stopped {
+    -fx-background-color: rgba(244, 67, 54, 0.2);
+    -fx-text-fill: #f44336;
+    -fx-border-color: #f44336;
+    -fx-border-radius: 12;
+}
