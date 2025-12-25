@@ -8,6 +8,11 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g., v1.0.0)'
+        required: true
+        default: 'v1.0.0'
 
 permissions:
   contents: write
@@ -18,6 +23,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Important for tag discovery if manual
 
     - name: Set up JDK 21
       uses: actions/setup-java@v4
@@ -25,6 +32,22 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: gradle
+
+    - name: Get version from tag
+      id: get_version
+      run: |
+        # Use input tag if workflow_dispatch, otherwise use ref_name
+        TAG=${{ github.event.inputs.tag || github.ref_name }}
+        # Default to 1.0.0 if not a tag (e.g. push to main)
+        if [[ $TAG != v* ]]; then
+          VERSION="1.0.0"
+          TAG="v1.0.0"
+        else
+          VERSION=${TAG#v}
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
+        echo "Using version $VERSION and tag $TAG"
 
     - name: Make scripts executable
       run: |
@@ -35,7 +58,7 @@ jobs:
       run: ./scripts/create_icns.sh src/main/resources/dev/perillo/serversmith/app-icon.png src/main/resources/dev/perillo/serversmith/app-icon.icns
 
     - name: Build with Gradle
-      run: ./gradlew jpackage
+      run: ./gradlew jpackage -PappVersion=${{ steps.get_version.outputs.version }}
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
@@ -44,9 +67,10 @@ jobs:
         path: build/dist/*.dmg
 
     - name: Create Release
-      if: startsWith(github.ref, 'refs/tags/v')
+      if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: ${{ steps.get_version.outputs.tag }}
         files: build/dist/*.dmg
         draft: false
         prerelease: false

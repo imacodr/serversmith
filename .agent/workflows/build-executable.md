@@ -51,6 +51,13 @@ The project is configured to automatically create a GitHub Release when you push
 3. **Check GitHub Actions**:
    The "Build and Release" workflow will trigger, build the DMG, and automatically create a release with the DMG attached as an asset.
 
+### Manual Release
+You can also trigger a release manually for any existing tag:
+1. Go to the **Actions** tab on GitHub.
+2. Select the **Build and Release** workflow.
+3. Click **Run workflow**.
+4. Enter the tag name (e.g., `v1.0.0`) and click **Run workflow**.
+
 ## Output
 The final executable/installer will be located in `build/dist/ServerSmith-1.0.0.dmg`.
 

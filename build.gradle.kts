@@ -42,7 +42,7 @@ tasks.register<Exec>("jpackage") {
     val inputDir = "build/install/ServerSmith/lib"
     val outputDir = "build/dist"
     val mainJar = "ServerSmith.jar"
-    val mainClass = "dev.perillo.serversmith.Launcher"
+    val appVersion = project.findProperty("appVersion")?.toString() ?: "1.0.0"
 
     doFirst {
         delete(outputDir)
@@ -54,7 +54,7 @@ tasks.register<Exec>("jpackage") {
         "--name", "ServerSmith",
         "--vendor", "Sam Perillo",
         "--description", "A professional server management and creation tool.",
-        "--app-version", "1.0.0",
+        "--app-version", appVersion,
         "--main-jar", mainJar,
         "--main-class", mainClass,
         "--input", inputDir,
