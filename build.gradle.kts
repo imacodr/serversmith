@@ -42,14 +42,28 @@ tasks.register<Exec>("jpackage") {
     val inputDir = "build/install/ServerSmith/lib"
     val outputDir = "build/dist"
     val mainJar = "ServerSmith.jar"
+    val mainClass = "dev.perillo.serversmith.Launcher"
     val appVersion = project.findProperty("appVersion")?.toString() ?: "1.0.0"
+    val os = org.gradle.internal.os.OperatingSystem.current()
 
     doFirst {
         delete(outputDir)
         mkdir(outputDir)
     }
 
-    commandLine(
+    val platformType = when {
+        os.isMacOsX -> "dmg"
+        os.isWindows -> "exe"
+        else -> "deb" // Default to deb for Linux
+    }
+
+    val iconExt = when {
+        os.isMacOsX -> "icns"
+        os.isWindows -> "ico"
+        else -> "png"
+    }
+
+    commandLine(mutableListOf(
         "jpackage",
         "--name", "ServerSmith",
         "--vendor", "Sam Perillo",
@@ -59,9 +73,17 @@ tasks.register<Exec>("jpackage") {
         "--main-class", mainClass,
         "--input", inputDir,
         "--dest", outputDir,
-        "--icon", "src/main/resources/dev/perillo/serversmith/app-icon." + (if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "icns" else "png"),
-        "--type", if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "dmg" else "exe",
-        "--mac-package-name", "ServerSmith",
-        "--mac-package-identifier", "dev.perillo.serversmith"
-    )
+        "--icon", "src/main/resources/dev/perillo/serversmith/app-icon.$iconExt",
+        "--type", platformType
+    ).apply {
+        if (os.isMacOsX) {
+            addAll(listOf("--mac-package-name", "ServerSmith", "--mac-package-identifier", "dev.perillo.serversmith"))
+        }
+        if (os.isWindows) {
+            addAll(listOf("--win-shortcut", "--win-menu"))
+        }
+        if (os.isLinux) {
+            addAll(listOf("--linux-shortcut"))
+        }
+    })
 }
