@@ -33,3 +33,34 @@ java {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
+
+tasks.register<Exec>("jpackage") {
+    group = "distribution"
+    description = "Packages the application as a standalone executable using jpackage"
+    dependsOn("installDist")
+
+    val inputDir = "build/install/ServerSmith/lib"
+    val outputDir = "build/dist"
+    val mainJar = "ServerSmith.jar"
+    val mainClass = "dev.perillo.serversmith.App"
+
+    doFirst {
+        delete(outputDir)
+        mkdir(outputDir)
+    }
+
+    commandLine(
+        "jpackage",
+        "--name", "ServerSmith",
+        "--vendor", "Sam Perillo",
+        "--description", "A professional server management and creation tool.",
+        "--app-version", "1.0.0",
+        "--main-jar", mainJar,
+        "--main-class", mainClass,
+        "--input", inputDir,
+        "--dest", outputDir,
+        "--icon", "src/main/resources/dev/perillo/serversmith/app-icon." + (if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "icns" else "png"),
+        "--type", if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "dmg" else "exe",
+        "--mac-package-name", "ServerSmith"
+    )
+}

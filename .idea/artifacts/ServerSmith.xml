@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ServerSmith">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServerSmith</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="alias" value="" />
+        <option name="appClass" value="dev.perillo.serversmith.App" />
+        <option name="description" value="Create Minecraft Servers with ease with ServerSmith" />
+        <option name="enabledSigning" value="true" />
+        <option name="height" value="800" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="keystore" value="" />
+        <option name="title" value="ServerSmith" />
+        <option name="vendor" value="Sam Perillo" />
+        <option name="version" value="" />
+        <option name="width" value="1200" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="ServerSmith.jar">
+        <element id="module-output" name="ServerSmith" />
+      </element>
+    </root>
+  </artifact>
+</component>
