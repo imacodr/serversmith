@@ -60,24 +60,14 @@ jobs:
 
     - name: Prepare Icons (Windows)
       if: matrix.os == 'windows-latest'
-      uses: asdf-vm/actions/setup@v3 # Just placeholder for possible tool, actually jpackage can use PNG on some versions but ICO is safer
-      # Using a simple powershell script or action to convert PNG to ICO if needed
-      # For now, let's assume we provide the PNG and jpackage handles it or we use a tool
-
-    - name: Convert PNG to ICO (Windows)
-      if: matrix.os == 'windows-latest'
       shell: pwsh
       run: |
-        # Simple fallback: if jpackage fails with PNG, we'd need a real converter.
-        # Most jpackage versions for Windows actually require .ico.
-        # We can use a simple web-service or a pre-compiled tool, but for CI
-        # let's try to use a node script or similar if possible.
-        # Alternative: use a dedicated action.
         npm install -g png-to-ico
         npx png-to-ico src/main/resources/dev/perillo/serversmith/app-icon.png > src/main/resources/dev/perillo/serversmith/app-icon.ico
 
     - name: Build with Gradle
-      run: ./gradlew jpackage -PappVersion=${{ steps.get_version.outputs.version }}
+      shell: bash
+      run: ./gradlew jpackage "-PappVersion=${{ steps.get_version.outputs.version }}"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
