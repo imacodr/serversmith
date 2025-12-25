@@ -21,7 +21,7 @@ javafx {
 }
 
 application {
-    mainClass.set("dev.perillo.serversmith.App")
+    mainClass.set("dev.perillo.serversmith.Launcher")
 }
 
 tasks.test {
@@ -42,7 +42,7 @@ tasks.register<Exec>("jpackage") {
     val inputDir = "build/install/ServerSmith/lib"
     val outputDir = "build/dist"
     val mainJar = "ServerSmith.jar"
-    val mainClass = "dev.perillo.serversmith.App"
+    val mainClass = "dev.perillo.serversmith.Launcher"
 
     doFirst {
         delete(outputDir)
@@ -61,6 +61,7 @@ tasks.register<Exec>("jpackage") {
         "--dest", outputDir,
         "--icon", "src/main/resources/dev/perillo/serversmith/app-icon." + (if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "icns" else "png"),
         "--type", if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "dmg" else "exe",
-        "--mac-package-name", "ServerSmith"
+        "--mac-package-name", "ServerSmith",
+        "--mac-package-identifier", "dev.perillo.serversmith"
     )
 }

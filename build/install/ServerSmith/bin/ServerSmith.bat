@@ -74,7 +74,7 @@ set CLASSPATH=%APP_HOME%\lib\ServerSmith.jar;%APP_HOME%\lib\jackson-annotations-
 
 
 @rem Execute ServerSmith
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %SERVER_SMITH_OPTS%  -classpath "%CLASSPATH%" dev.perillo.serversmith.App %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %SERVER_SMITH_OPTS%  -classpath "%CLASSPATH%" dev.perillo.serversmith.Launcher %*
 
 :end
 @rem End local scope for the variables with windows NT shell

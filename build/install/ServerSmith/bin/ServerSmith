@@ -212,7 +212,7 @@ DEFAULT_JVM_OPTS=""
 
 set -- \
         -classpath "$CLASSPATH" \
-        dev.perillo.serversmith.App \
+        dev.perillo.serversmith.Launcher \
         "$@"
 
 # Stop when "xargs" is not available.

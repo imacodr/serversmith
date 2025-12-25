@@ -27,15 +27,32 @@ jpackage \
   --description "A professional server management and creation tool." \
   --app-version "1.0.0" \
   --main-jar "ServerSmith.jar" \
-  --main-class "dev.perillo.serversmith.App" \
+  --main-class "dev.perillo.serversmith.Launcher" \
   --input "build/install/ServerSmith/lib" \
   --dest "build/dist" \
   --icon "src/main/resources/dev/perillo/serversmith/app-icon.png" \
   --type "dmg"
 ```
 
+## Creating a GitHub Release
+
+The project is configured to automatically create a GitHub Release when you push a version tag.
+
+1. **Tag your commit**:
+   ```bash
+   git tag -a v1.0.0 -m "Release version 1.0.0"
+   ```
+
+2. **Push the tag**:
+   ```bash
+   git push origin v1.0.0
+   ```
+
+3. **Check GitHub Actions**:
+   The "Build and Release" workflow will trigger, build the DMG, and automatically create a release with the DMG attached as an asset.
+
 ## Output
-The final executable/installer will be located in `build/dist/ServerSmith.dmg`.
+The final executable/installer will be located in `build/dist/ServerSmith-1.0.0.dmg`.
 
 ## Metadata
 The executable includes the following professional information:
